@@ -1,6 +1,33 @@
 <mat-card>
-    <mat-card-title>Welcome to CaptivePortalJumper</mat-card-title>
+    <mat-card-title>Captive Portal Jumper</mat-card-title>
     <mat-card-content>
-        This is the example module.
+      <mat-horizontal-stepper #wizard>
+        <!-- Setup New Captive Portal Bypass -->
+        <mat-step>
+          <p> New Captive Portal Bypass </p>
+          <div>
+            <button mat-button matStepperNext (click)="getAP()">Next</button>
+          </div>
+        </mat-step>
+        <!-- Select OPEN AP  to Target -->
+        <mat-step>
+          <mat-form-field>
+            <mat-label>Access Point</mat-label>
+            <mat-select [(value)] = "selectedAP">
+              <mat-option *ngFor="let ap of availableAP" [value]="ap[1]">
+                {{ap[0]}}
+              </mat-option>
+            </mat-select>
+            <button mat-icon-button aria-label="Refresh Access Point List" (click)="getAP()"> <!-- put this button NEXT to the select -->
+              <mat-icon>restart_alt</mat-icon> <!-- fix this icon -->
+            </button>
+          </mat-form-field>
+          <br>
+          <div>
+            <button mat-button (click)="wizard.reset()">Reset</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
     </mat-card-content>
 </mat-card>

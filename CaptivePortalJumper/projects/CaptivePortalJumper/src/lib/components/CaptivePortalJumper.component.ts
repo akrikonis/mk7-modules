@@ -9,6 +9,19 @@ import { ApiService } from '../services/api.service';
 export class CaptivePortalJumperComponent implements OnInit {
     constructor(private API: ApiService) { }
 
+    availableAP = [];
+    selectedAP = "";
+    
+    getAP(): void {
+       this.API.request({
+         module: 'CaptivePortalJumper',
+         action: 'getAP'
+       }, (response) => {
+         this.availableAP = JSON.parse(response);
+       })
+    }
+
     ngOnInit() {
+
     }
 }

@@ -1,8 +1,7 @@
 {
     "name": "CaptivePortalJumper",
     "title": "Captive Portal Jumper",
-    "description": "Captive portal bypasser",
+    "description": "An automated captive portal bypasser.",
     "version": "1.0",
     "author": "akrikonis"
 }
-
