@@ -9,15 +9,29 @@ import { ApiService } from '../services/api.service';
 export class CaptivePortalJumperComponent implements OnInit {
     constructor(private API: ApiService) { }
 
+    clientsToAttack = [];
     availableAP = [];
-    selectedAP = "";
-    
+    selectedAP = [];
+    clientsFound = [];
+    autoAttack = "";
+
     getAP(): void {
        this.API.request({
          module: 'CaptivePortalJumper',
          action: 'getAP'
        }, (response) => {
          this.availableAP = JSON.parse(response);
+       })
+    }
+
+    getClients(): void {
+       this.API.request({
+         module: 'CaptivePortalJumper',
+         action: 'getClients',
+         bssid: this.selectedAP[0],
+         channel: this.selectedAP[1]
+       }, (response) => {
+         this.clientsFound = JSON.parse(response);
        })
     }
 
