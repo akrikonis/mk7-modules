@@ -9,6 +9,7 @@
             <button mat-button matStepperNext (click)="getAP()">Next</button>
           </div>
         </mat-step>
+
         <!-- Select OPEN AP to Target -->
         <mat-step>
           <mat-form-field>
@@ -19,8 +20,8 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <button mat-icon-button aria-label="Refresh Access Point List" (click)="getAP()"> <!-- put this button NEXT to the select -->
-            <mat-icon>autorenew</mat-icon> <!-- fix this icon -->
+          <button mat-icon-button aria-label="Refresh Access Point List" (click)="getAP()">
+            <mat-icon>autorenew</mat-icon>
           </button>
           <br>
           <div>
@@ -28,20 +29,27 @@
             <button mat-button matStepperNext (click)="getClients()">Next</button>
           </div>
         </mat-step>
+
         <!-- Select Attack Mode -->
         <mat-step>
-          <mat-action-list>
-            <button mat-list-item  *ngFor="let client of clientsFound">
-              {{client}}
+          <mat-card>
+            <mat-selection-list #clientsList>
+              <mat-list-option mat-list-item  *ngFor="let client of clientsFound">
+                {{client}}
+              </mat-list-option>
+            </mat-selection-list>
+            <button mat-icon-button aria-label="Refresh Client List" (click)="getClients()">
+              <mat-icon>autorenew</mat-icon>
             </button>
-          </mat-action-list>
+          </mat-card>
+          <br>
           <mat-radio-group [(ngModel)]="autoAttack">
-            <mat-radio-button name="mode" [value]="0">Attack Specific Client</mat-radio-button>
+            <mat-radio-button name="mode" [value]="0">Attack Specific Clients</mat-radio-button>
             <mat-radio-button name="mode" [value]="1">Attack All Clients</mat-radio-button>
           </mat-radio-group>
           <div>
             <button mat-button (click)="wizard.reset()">Reset</button>
-            <button mat-button matStepperNext>Next</button>
+            <button mat-button matStepperNext (click)="startAttack()">Start</button>
           </div>
         </mat-step>
       </mat-horizontal-stepper>

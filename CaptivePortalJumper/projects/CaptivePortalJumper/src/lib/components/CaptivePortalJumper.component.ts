@@ -9,11 +9,14 @@ import { ApiService } from '../services/api.service';
 export class CaptivePortalJumperComponent implements OnInit {
     constructor(private API: ApiService) { }
 
-    clientsToAttack = [];
     availableAP = [];
     selectedAP = [];
     clientsFound = [];
     autoAttack = "";
+
+    startAttack(): void {
+      console.log("Attack would start now");
+    }
 
     getAP(): void {
        this.API.request({
@@ -35,7 +38,16 @@ export class CaptivePortalJumperComponent implements OnInit {
        })
     }
 
-    ngOnInit() {
+    loadConfig(): void {
+      this.API.request({
+        module: 'CaptivePortalJumper',
+        action: 'loadConfig'
+      }, (response) => {
 
+      })
+    }
+
+    ngOnInit() {
+      this.loadConfig();
     }
 }
